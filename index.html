@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0a1223">
+  <title>Christmas Starlight</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="spruce.js"></script>
+  <script defer src="finale.js"></script>
+  <script defer src="source-backdrop.js"></script>
+  <script defer src="starfield.js"></script>
+  <script defer src="scene.js"></script>
+</head>
+<body>
+  <main id="christmas-scene" class="scene" tabindex="0"
+    aria-label="圣诞树视角" aria-keyshortcuts="ArrowLeft ArrowRight ArrowUp ArrowDown">
+    <div class="source-backdrop" aria-hidden="true"><pre><code data-source-code></code></pre></div>
+    <canvas id="winter-scene" aria-hidden="true"></canvas>
+    <aside class="scene-note" lang="en">
+      <p class="scene-note-cyan">Certain names are easier to find in things than to say aloud.</p>
+      <p class="scene-note-yellow">Yours appears in margins, in colors, in half-finished thoughts.</p>
+      <p class="scene-note-magenta">Mine is usually somewhere nearby.</p>
+    </aside>
+    <button id="tree-star" type="button" aria-label="按住金星开启星空"
+      aria-controls="finale" disabled></button>
+  </main>
+
+  <section id="finale" class="c-finale" tabindex="-1" aria-label="星空彩蛋" hidden>
+    <div class="c-finale-plate">
+      <canvas id="asterism-canvas" role="img" aria-label="金色星点连成 ALIENSHUN"></canvas>
+      <p id="asterism-caption" class="c-finale-caption">λ 490 nm · 580 nm · extra-spectral</p>
+      <div class="c-finale-controls">
+        <span>Edition 1 / 1</span>
+        <button id="spectral-star-btn" class="c-finale-prism" type="button"
+          aria-label="切换星空光谱" aria-pressed="false">✦</button>
+        <button id="coords-secret-btn" type="button">31°50'N, 117°16'E</button>
+      </div>
+    </div>
+    <button id="replay" class="c-finale-replay" type="button" lang="en">Replay</button>
+  </section>
+</body>
+</html>

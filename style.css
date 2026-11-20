@@ -1,0 +1,265 @@
+:root {
+  color-scheme: dark;
+  background: #060b17;
+  color: #f1e3c9;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; }
+[hidden] { display: none !important; }
+button { font: inherit; }
+
+.scene, .c-finale {
+  position: fixed;
+  inset: 0;
+}
+
+.scene {
+  overflow: hidden;
+  isolation: isolate;
+  touch-action: none;
+  background:
+    radial-gradient(ellipse at 76% 81%, #7e426a14 0%, transparent 44%),
+    radial-gradient(ellipse at 49% 81%, #4c64831c 0%, transparent 45%),
+    radial-gradient(ellipse at 49% 43%, #21374d 0%, #152740 44%, #0d182d 72%, #080e1e 100%);
+  transition: opacity 1.1s ease;
+}
+
+.scene.is-leaving { opacity: 0; }
+#winter-scene {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  user-select: none;
+}
+
+.scene.is-dragging #winter-scene,
+.scene.is-dragging #tree-star { cursor: grabbing; }
+.scene:focus { outline: none; }
+.scene:focus-visible { outline: 1px solid #f8e4bc75; outline-offset: -5px; }
+.c-finale:focus { outline: none; }
+
+.source-backdrop {
+  position: absolute;
+  inset: 8% auto 7% clamp(18px, 4.6vw, 86px);
+  width: min(58vw, 820px);
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+  opacity: .44;
+  color: #bfcee5;
+  mask-image: linear-gradient(to bottom, transparent, #000 7%, #000 86%, transparent);
+  transform: translate(var(--source-x, 0px), var(--source-y, 0px));
+}
+
+.source-backdrop pre {
+  margin: 0;
+  font: 400 clamp(10px, 1.035vw, 14px)/1.64 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  white-space: pre;
+  mask-image: linear-gradient(to right, #000 31%, #000b 63%, transparent 97%);
+}
+
+.source-backdrop code {
+  display: block;
+  font: inherit;
+  animation: scroll-source 92s linear infinite;
+}
+
+.source-code-copy { display: block; padding-bottom: 3.28em; }
+
+@keyframes scroll-source {
+  from { transform: translateY(0); }
+  to { transform: translateY(-50%); }
+}
+
+.source-keyword { color: #efc69c; }
+.source-string { color: #adced0; }
+.source-number { color: #b4c7ea; }
+.source-comment { color: #aeb5c4; font-style: italic; }
+
+@media (max-width: 600px) {
+  .source-backdrop {
+    inset-block: 9% 11%;
+    width: calc(100% - 18px);
+    opacity: .29;
+  }
+}
+
+.scene-note {
+  display: none;
+  position: absolute;
+  top: 48%;
+  inset-inline-start: max(68%, calc(50% + min(20.5vh, 244px) + 3vw));
+  inset-inline-end: clamp(24px, 4.7vw, 105px);
+  max-width: 22.5rem;
+  transform: translateY(-50%);
+  font: italic 400 clamp(20px, 1.85vw, 34px)/1.26 "Baskerville", "Iowan Old Style", Georgia, serif;
+  letter-spacing: .012em;
+  text-wrap: pretty;
+  pointer-events: none;
+}
+
+.scene-note p {
+  margin: 0;
+  text-shadow: 0 2px 14px #050a1db3, 0 0 25px #050a1d6b;
+}
+
+.scene-note p + p { margin-top: .91em; }
+.scene-note-cyan { color: #91e5ee; }
+.scene-note-yellow { color: #ffe19b; padding-inline-start: .55em; }
+.scene-note-magenta { color: #f6a8dc; padding-inline-start: 1.1em; }
+
+@media (min-width: 960px) and (hover: hover) and (pointer: fine) {
+  .scene-note { display: block; }
+}
+
+#tree-star {
+  position: absolute;
+  left: var(--star-x, 50%);
+  top: var(--star-y, 20%);
+  width: var(--star-size, 56px);
+  aspect-ratio: 1;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  touch-action: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+#tree-star:disabled { pointer-events: none; }
+#tree-star:focus-visible { outline: 1px solid #fae6b5; outline-offset: 4px; }
+
+.c-finale {
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  padding: 1.25rem;
+  overflow: auto;
+  color: #e0d2b6;
+  isolation: isolate;
+  background: radial-gradient(ellipse at 50% 48%, #101523 0%, #060a13 46%, #03050b 90%);
+}
+
+.c-finale:not([hidden]) { animation: reveal-sky 1.1s ease both; }
+
+@keyframes reveal-sky {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.c-finale-plate {
+  width: min(100%, 740px);
+  text-align: center;
+}
+
+#asterism-canvas {
+  width: 100%;
+  height: clamp(86px, 16vw, 148px);
+  display: block;
+  box-sizing: border-box;
+  border-block: 1px solid rgba(214, 178, 120, 0.2);
+  background: radial-gradient(ellipse at 50% 50%, #0b1121 0%, #060912 100%);
+}
+
+.c-finale-caption,
+.c-finale-controls {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.c-finale-caption {
+  min-height: 1em;
+  margin: 0.85rem 0 0;
+  color: #998e80;
+  transition: color 1s ease;
+}
+
+.c-finale-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0 1rem;
+  margin-top: 0.7rem;
+  color: #baa88d;
+}
+
+.c-finale-controls button,
+.c-finale-replay {
+  min-height: 44px;
+  border: 0;
+  padding: 0 0.3rem;
+  font: inherit;
+  letter-spacing: inherit;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  transition: color 0.35s ease, text-shadow 0.35s ease;
+}
+
+.c-finale-controls button:hover,
+.c-finale-replay:hover {
+  color: #f4dbad;
+}
+
+.c-finale-controls button:focus-visible,
+.c-finale-replay:focus-visible {
+  outline: 1px solid #f4dbad;
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+.c-finale-controls .c-finale-prism {
+  min-width: 44px;
+  color: #d6b278;
+  font-size: 1.06rem;
+}
+
+.c-finale.spectral-active .c-finale-prism {
+  color: #f4dbad;
+  text-shadow: 0 0 12px rgba(236, 209, 162, 0.9);
+}
+
+.c-finale.spectral-active .c-finale-caption {
+  color: #d6b278;
+}
+
+.c-finale-replay {
+  position: absolute;
+  bottom: max(1.5rem, env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%);
+  padding-inline: 1rem;
+  font: 0.8rem system-ui, sans-serif;
+  letter-spacing: 0.14em;
+  color: #baa88d;
+}
+
+@media (max-height: 340px) {
+  .c-finale {
+    padding-bottom: 3.5rem;
+  }
+
+  .c-finale-replay {
+    bottom: 0.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene, .c-finale-caption,
+  .c-finale-controls button, .c-finale-replay { transition: none; }
+  .c-finale:not([hidden]) { animation: none; }
+  .source-backdrop code { animation: none; }
+}
